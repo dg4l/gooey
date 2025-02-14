@@ -1,5 +1,5 @@
 # gooey
-experimental immediate mode ui framework for raylib
+experimental ui framework for raylib :)
 
 hierarchy stuff:
 UiCtx -> Panels -> Elements (buttons, text, etc)
