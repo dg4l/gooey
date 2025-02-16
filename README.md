@@ -1,7 +1,6 @@
 # gooey
 experimental ui framework for raylib :)
 
-hierarchy stuff:
-UiCtx -> Panels -> Elements (buttons, text, etc)
+## use cases
 
-!!!! elements cannot contain other elements: no recursion !!!!
+basically should only be used for clobbering together a quick and ugly debug ui
