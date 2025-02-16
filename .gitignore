@@ -1,3 +1,4 @@
 test
 gooey_test.c
 *.o
+examples/simple
