@@ -94,7 +94,8 @@ TextInput* create_text_input_intrinsic(char* buf, int bufsize,int posx, int posy
     ti->tb = create_text_button_intrinsic(buf, posx, posy, width, height, fontSize, color, color, &ti->allowInput);
     ti->buf = buf;
     ti->bufsize = bufsize;
-    ti->keyPressed = 0;
+    // TODO: implement this later
+    //ti->keyPressed = 0;
     ti->allowInput = 0;
     return ti;
 }

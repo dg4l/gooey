@@ -61,7 +61,8 @@ typedef struct TextButton{
 typedef struct TextInput{
     TextButton* tb;
     char* buf;
-    int keyPressed;
+    // TODO: implement later
+    //int keyPressed;
     int bufsize;
     int txtpos;
     bool allowInput;
