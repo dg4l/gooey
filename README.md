@@ -14,7 +14,7 @@ basically should only be used for clobbering together a quick and ugly debug ui
     bind_element_to_pane(textbutton, pane);
 ```
 
-then, simply run `draw_pane(testpane);` in your main loop :)
+then, simply run `draw_pane(pane);` in your main loop :)
 
 the bool `dec` will be toggled when the button is pressed, allowing for dynamic behavior
 
