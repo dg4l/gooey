@@ -1,8 +1,8 @@
 #include "gooey.h"
 #include <string.h>
 
-// hierarchy: ui context/state -> panes -> elements (can't be a pane, maybe could be in the future) 
-// implement button hierarchy, two should not be selected at once, one rendered most recently should take priority
+// hierarchy: ui context/state -> panes -> elements 
+// TODO: implement button precedence, two should not be selected at once, one rendered most recently should take priority
 void draw_button(Button* button){
     Color color = button->normalColor;
     if (button_hovered(button)){
