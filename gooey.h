@@ -4,10 +4,12 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-#define GOOEY_BUTTON 1
-#define GOOEY_TEXT_BUTTON 2
-#define GOOEY_TEXT_BOX 3
-#define GOOEY_TEXT_INPUT 4
+enum GOOEY_ELEMENTS{
+    GOOEY_BUTTON,
+    GOOEY_TEXT_BUTTON,
+    GOOEY_TEXT_BOX,
+    GOOEY_TEXT_INPUT
+};
 
 typedef struct GooVec2{
     int x;
