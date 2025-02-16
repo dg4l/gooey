@@ -48,11 +48,28 @@ void draw_text_box(TextBox* tb){
     DrawText(tb->label, tb->posx, tb->posy, tb->fontsize, WHITE);
 }
 
-// TODO: this leaks, switch on type and kill the other shit :)
+
+// TODO: this might leak!
 void kill_pane(Pane** pane){
     if (*pane){
         for (size_t i = 0; i < (*pane)->elementCount; ++i){
-            free((*pane)->elements[i]);
+            switch((*pane)->elements[i]->type){
+                case GOOEY_TEXT_INPUT:
+                    TextInput* ti = (*pane)->elements[i]->pElement;
+                    free(ti->tb->button);
+                    free(ti->tb);
+                    free(ti);
+                    break;
+                case GOOEY_TEXT_BUTTON:
+                    TextButton* tb = (*pane)->elements[i]->pElement;
+                    free(tb->button);
+                    free(tb);
+                    break;
+                case GOOEY_BUTTON:
+                    Button* button = (*pane)->elements[i]->pElement;
+                    free(button);
+                    break;
+            }
             (*pane)->elements[i] = NULL;
         }
         free(*pane);
