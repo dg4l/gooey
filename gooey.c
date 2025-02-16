@@ -27,7 +27,10 @@ void draw_text_input(TextInput* ti){
             int key = GetKeyPressed();
             if (key){
                 while (key > 0){
-                if (ti->txtpos < ti->bufsize){
+                if (key == 257){
+                    break;
+                }
+                else if (ti->txtpos < ti->bufsize){
                     if (key == 259){
                         ti->buf[ti->txtpos-1] = '\0';
                         --ti->txtpos;
