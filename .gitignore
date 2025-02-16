@@ -1,3 +1,4 @@
 test
 makefile
 gooey_test.c
+*.o
