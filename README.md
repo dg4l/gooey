@@ -1,5 +1,5 @@
 # gooey
-experimental ui framework for raylib :)
+experimental ui framework for [raylib](https://github.com/raysan5/raylib) :)
 
 ## use cases
 
