@@ -21,13 +21,15 @@ void draw_text_button(TextButton* tb){
     DrawText(tb->label, tb->button->bounds.x + 2, tb->button->bounds.y + tb->button->bounds.height/2, tb->fontSize, WHITE);
 }
 
+
+// TODO: handle shift combos, for now we ignore shift 
 void draw_text_input(TextInput* ti){
     draw_text_button(ti->tb);
     if (*(ti->tb->button->toggle)){
             int key = GetKeyPressed();
             if (key){
                 while (key > 0){
-                if (key == 257){
+                if (key == KEY_ENTER || key == KEY_TAB || key == KEY_LEFT_CONTROL || key == KEY_LEFT_ALT || key == KEY_RIGHT_CONTROL || key == KEY_RIGHT_ALT || key == KEY_LEFT_SHIFT || key == KEY_RIGHT_SHIFT){
                     break;
                 }
                 else if (ti->txtpos < ti->bufsize){
