@@ -18,7 +18,7 @@ void draw_button(Button* button){
 // create visual distinction between TextButtons and TextBoxes
 void draw_text_button(TextButton* tb){
     draw_button(tb->button);
-    DrawText(tb->label, tb->button->bounds.x + strlen(tb->label), tb->button->bounds.y + tb->button->bounds.height/2, tb->fontSize, WHITE);
+    DrawText(tb->label, tb->button->bounds.x + 2, tb->button->bounds.y + tb->button->bounds.height/2, tb->fontSize, WHITE);
 }
 
 void draw_text_box(TextBox* tb){
