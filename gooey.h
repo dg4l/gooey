@@ -7,6 +7,7 @@
 #define GOOEY_BUTTON 1
 #define GOOEY_TEXT_BUTTON 2
 #define GOOEY_TEXT_BOX 3
+#define GOOEY_TEXT_INPUT 4
 
 typedef struct GooVec2{
     int x;
@@ -57,6 +58,14 @@ typedef struct TextButton{
     char* label;
 }TextButton;
 
+typedef struct TextInput{
+    TextButton* tb;
+    char* buf;
+    int keyPressed;
+    int bufsize;
+    int txtpos;
+}TextInput;
+
 typedef struct TextBox{
     char* label;
     int fontsize;
@@ -74,6 +83,8 @@ UiElement* text_box_to_element(TextBox* textbox);
 TextButton* create_text_button_intrinsic(char* text, int posx, int posy, int width, int height, int fontSize, Color normalColor, Color hoverColor, bool* toggle);
 UiElement* create_text_button(char* text, int posx, int posy, int width, int height, int fontSize, Color normalColor, Color hoverColor, bool* toggle);
 Button* create_button(int posx, int posy, int width, int height, Color normalColor, Color hoverColor, bool* toggle);
+TextInput* create_text_input_intrinsic(char* buf, int bufsize,int posx, int posy, int width, int height, int fontSize, Color normalColor, bool* toggle);
+UiElement* create_text_input(char* buf, int bufsize,int posx, int posy, int width, int height, int fontSize, Color color, bool* toggle);
 void kill_pane(Pane** pane);
 UiElement* text_button_to_element(TextButton* tb);
 void draw_text_box(TextBox* tb);

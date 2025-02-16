@@ -21,11 +21,34 @@ void draw_text_button(TextButton* tb){
     DrawText(tb->label, tb->button->bounds.x + 2, tb->button->bounds.y + tb->button->bounds.height/2, tb->fontSize, WHITE);
 }
 
+void draw_text_input(TextInput* ti){
+    draw_text_button(ti->tb);
+    if (*(ti->tb->button->toggle)){
+            int key = GetKeyPressed();
+            if (key){
+                while (key > 0){
+                if (ti->txtpos < ti->bufsize){
+                    if (key == 259){
+                        ti->buf[ti->txtpos-1] = '\0';
+                        --ti->txtpos;
+                    }
+                    else{
+                        ti->buf[ti->txtpos] = key;
+                        ti->buf[ti->txtpos+1] = '\0';
+                        ++ti->txtpos;
+                    }
+                    key = GetKeyPressed();
+                }
+           }
+        }
+    }
+}
+
 void draw_text_box(TextBox* tb){
     DrawText(tb->label, tb->posx, tb->posy, tb->fontsize, WHITE);
 }
 
-//travel through pane and kill all subelements
+// TODO: this leaks, switch on type and kill the other shit :)
 void kill_pane(Pane** pane){
     if (*pane){
         for (size_t i = 0; i < (*pane)->elementCount; ++i){
@@ -36,6 +59,23 @@ void kill_pane(Pane** pane){
         *pane = NULL;
     }
 }
+
+UiElement* create_text_input(char* buf, int bufsize,int posx, int posy, int width, int height, int fontSize, Color color, bool* toggle){
+    UiElement* el = malloc(sizeof(UiElement));
+    el->pElement = create_text_input_intrinsic(buf, bufsize, posx, posy, width, height, fontSize, color, toggle);
+    el->type = GOOEY_TEXT_INPUT;
+    return el;
+}
+
+TextInput* create_text_input_intrinsic(char* buf, int bufsize,int posx, int posy, int width, int height, int fontSize, Color color, bool* toggle){
+    TextInput* ti = malloc(sizeof(TextInput));
+    ti->tb = create_text_button_intrinsic(buf, posx, posy, width, height, fontSize, color, color, toggle);
+    ti->buf = buf;
+    ti->bufsize = bufsize;
+    ti->keyPressed = 0;
+    return ti;
+}
+
 
 // if not bound to a pane, normalBounds and bounds will be the same 
 Button* create_button(int posx, int posy, int width, int height, Color normalColor, Color hoverColor, bool* toggle){
@@ -82,6 +122,11 @@ void draw_pane(Pane* pane){
                 case GOOEY_TEXT_BOX:
                     printf("not implemented\n");
                     break;
+                case GOOEY_TEXT_INPUT:
+                    TextInput* ti = pane->elements[i]->pElement;
+                    ti->tb->button->bounds.x = pane->posx + ti->tb->button->normalBounds.x;
+                    ti->tb->button->bounds.y = pane->posy + ti->tb->button->normalBounds.y;
+                    draw_text_input(ti);
             }
         }
     }
