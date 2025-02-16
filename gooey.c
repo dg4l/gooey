@@ -77,19 +77,20 @@ void kill_pane(Pane** pane){
     }
 }
 
-UiElement* create_text_input(char* buf, int bufsize,int posx, int posy, int width, int height, int fontSize, Color color, bool* toggle){
+UiElement* create_text_input(char* buf, int bufsize,int posx, int posy, int width, int height, int fontSize, Color color){
     UiElement* el = malloc(sizeof(UiElement));
-    el->pElement = create_text_input_intrinsic(buf, bufsize, posx, posy, width, height, fontSize, color, toggle);
+    el->pElement = create_text_input_intrinsic(buf, bufsize, posx, posy, width, height, fontSize, color);
     el->type = GOOEY_TEXT_INPUT;
     return el;
 }
 
-TextInput* create_text_input_intrinsic(char* buf, int bufsize,int posx, int posy, int width, int height, int fontSize, Color color, bool* toggle){
+TextInput* create_text_input_intrinsic(char* buf, int bufsize,int posx, int posy, int width, int height, int fontSize, Color color){
     TextInput* ti = malloc(sizeof(TextInput));
-    ti->tb = create_text_button_intrinsic(buf, posx, posy, width, height, fontSize, color, color, toggle);
+    ti->tb = create_text_button_intrinsic(buf, posx, posy, width, height, fontSize, color, color, &ti->allowInput);
     ti->buf = buf;
     ti->bufsize = bufsize;
     ti->keyPressed = 0;
+    ti->allowInput = 0;
     return ti;
 }
 

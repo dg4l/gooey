@@ -64,6 +64,7 @@ typedef struct TextInput{
     int keyPressed;
     int bufsize;
     int txtpos;
+    bool allowInput;
 }TextInput;
 
 typedef struct TextBox{
@@ -83,8 +84,8 @@ UiElement* text_box_to_element(TextBox* textbox);
 TextButton* create_text_button_intrinsic(char* text, int posx, int posy, int width, int height, int fontSize, Color normalColor, Color hoverColor, bool* toggle);
 UiElement* create_text_button(char* text, int posx, int posy, int width, int height, int fontSize, Color normalColor, Color hoverColor, bool* toggle);
 Button* create_button(int posx, int posy, int width, int height, Color normalColor, Color hoverColor, bool* toggle);
-TextInput* create_text_input_intrinsic(char* buf, int bufsize,int posx, int posy, int width, int height, int fontSize, Color normalColor, bool* toggle);
-UiElement* create_text_input(char* buf, int bufsize,int posx, int posy, int width, int height, int fontSize, Color color, bool* toggle);
+UiElement* create_text_input(char* buf, int bufsize,int posx, int posy, int width, int height, int fontSize, Color color);
+TextInput* create_text_input_intrinsic(char* buf, int bufsize,int posx, int posy, int width, int height, int fontSize, Color color);
 void kill_pane(Pane** pane);
 UiElement* text_button_to_element(TextButton* tb);
 void draw_text_box(TextBox* tb);
