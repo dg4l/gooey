@@ -23,8 +23,13 @@ void draw_text_button(TextButton* tb){
 
 
 // TODO: handle shift combos, for now we ignore shift 
+// TODO: add arrow key cursor movement 
 void draw_text_input(TextInput* ti){
     draw_text_button(ti->tb);
+    // in case of overflow somehow
+    if (ti->txtpos > ti->bufsize){
+        ti->txtpos = ti->bufsize-1;
+    }
     if (*(ti->tb->button->toggle)){
             int key = GetKeyPressed();
             if (key){
