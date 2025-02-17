@@ -21,7 +21,7 @@ void draw_text_button(TextButton* tb){
     DrawText(tb->label, tb->button->bounds.x + 2, tb->button->bounds.y + tb->button->bounds.height/2, tb->fontSize, WHITE);
 }
 
-
+// FIXME: don't allow multiple of these shits to be selected, maybe handle in a context struct
 // TODO: handle shift combos, for now we ignore shift 
 // TODO: add arrow key cursor movement 
 void draw_text_input(TextInput* ti){
