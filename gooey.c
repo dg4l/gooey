@@ -34,6 +34,9 @@ void draw_text_input(TextInput* ti){
                 }
                 else if (ti->txtpos < ti->bufsize){
                     if (key == 259){
+                        if (ti->txtpos <= 0){
+                            return;
+                        }
                         ti->buf[ti->txtpos-1] = '\0';
                         --ti->txtpos;
                     }
