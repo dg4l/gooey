@@ -66,7 +66,7 @@ typedef struct TextInput{
     // TODO: implement later
     //int keyPressed;
     unsigned int bufsize;
-    unsigned int txtpos;
+    unsigned int curPos;
     bool allowInput;
 }TextInput;
 

@@ -27,8 +27,8 @@ void draw_text_button(TextButton* tb){
 void draw_text_input(TextInput* ti){
     draw_text_button(ti->tb);
     // in case of overflow somehow
-    if (ti->txtpos > ti->bufsize){
-        ti->txtpos = ti->bufsize-1;
+    if (ti->curPos > ti->bufsize){
+        ti->curPos = ti->bufsize-1;
     }
     if (*(ti->tb->button->toggle)){
             int key = GetKeyPressed();
@@ -37,18 +37,18 @@ void draw_text_input(TextInput* ti){
                 if (key == KEY_ENTER || key == KEY_TAB || key == KEY_LEFT_CONTROL || key == KEY_LEFT_ALT || key == KEY_RIGHT_CONTROL || key == KEY_RIGHT_ALT || key == KEY_LEFT_SHIFT || key == KEY_RIGHT_SHIFT){
                     break;
                 }
-                else if (ti->txtpos < ti->bufsize){
+                else if (ti->curPos < ti->bufsize){
                     if (key == 259){
-                        if (ti->txtpos <= 0){
+                        if (ti->curPos <= 0){
                             return;
                         }
-                        ti->buf[ti->txtpos-1] = '\0';
-                        --ti->txtpos;
+                        ti->buf[ti->curPos-1] = '\0';
+                        --ti->curPos;
                     }
                     else{
-                        ti->buf[ti->txtpos] = key;
-                        ti->buf[ti->txtpos+1] = '\0';
-                        ++ti->txtpos;
+                        ti->buf[ti->curPos] = key;
+                        ti->buf[ti->curPos+1] = '\0';
+                        ++ti->curPos;
                     }
                     key = GetKeyPressed();
                 }
