@@ -85,14 +85,14 @@ void kill_pane(Pane** pane){
     }
 }
 
-UiElement* create_text_input(char* buf, int bufsize,int posx, int posy, int width, int height, int fontSize, Color color){
+UiElement* create_text_input(char* buf, unsigned int bufsize, int posx, int posy, int width, int height, unsigned int fontSize, Color color){
     UiElement* el = malloc(sizeof(UiElement));
     el->pElement = create_text_input_intrinsic(buf, bufsize, posx, posy, width, height, fontSize, color);
     el->type = GOOEY_TEXT_INPUT;
     return el;
 }
 
-TextInput* create_text_input_intrinsic(char* buf, int bufsize,int posx, int posy, int width, int height, int fontSize, Color color){
+TextInput* create_text_input_intrinsic(char* buf, unsigned int bufsize, int posx, int posy, int width, int height, unsigned int fontSize, Color color){
     TextInput* ti = malloc(sizeof(TextInput));
     ti->tb = create_text_button_intrinsic(buf, posx, posy, width, height, fontSize, color, color, &ti->allowInput);
     ti->buf = buf;
@@ -202,13 +202,13 @@ UiElement* text_button_to_element(TextButton* tb){
     return el;
 }
 
-UiElement* create_text_button(char* text, int posx, int posy, int width, int height, int fontSize, Color normalColor, Color hoverColor, bool* toggle){
+UiElement* create_text_button(char* text, int posx, int posy, int width, int height, unsigned int fontSize, Color normalColor, Color hoverColor, bool* toggle){
     TextButton* tb = create_text_button_intrinsic(text, posx, posy, width, height, fontSize, normalColor, hoverColor, toggle);
     UiElement* el = text_button_to_element(tb);
     return el;
 }
 
-TextButton* create_text_button_intrinsic(char* text, int posx, int posy, int width, int height, int fontSize, Color normalColor, Color hoverColor, bool* toggle){
+TextButton* create_text_button_intrinsic(char* text, int posx, int posy, int width, int height, unsigned int fontSize, Color normalColor, Color hoverColor, bool* toggle){
     TextButton* tb = malloc(sizeof(TextButton));
     tb->button = create_button(posx, posy, width, height, normalColor, hoverColor, toggle);
     tb->fontSize = fontSize;

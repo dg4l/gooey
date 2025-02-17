@@ -56,7 +56,7 @@ typedef struct Button{
 
 typedef struct TextButton{
     Button* button;
-    int fontSize;
+    unsigned int fontSize;
     char* label;
 }TextButton;
 
@@ -65,14 +65,14 @@ typedef struct TextInput{
     char* buf;
     // TODO: implement later
     //int keyPressed;
-    int bufsize;
-    int txtpos;
+    unsigned int bufsize;
+    unsigned int txtpos;
     bool allowInput;
 }TextInput;
 
 typedef struct TextBox{
     char* label;
-    int fontsize;
+    unsigned int fontsize;
     int posx;
     int posy;
 }TextBox; 
@@ -84,11 +84,11 @@ UiCtx* init_gooey_ctx(int w, int h, int posx, int posy, uint16_t max_panes);
 TextBox* create_text_box_intrinsic(char* label, int posx, int posy, int fontsize);
 Pane* create_pane(int posx, int posy, int w, int h, uint16_t max_elements, Color background_color);
 UiElement* text_box_to_element(TextBox* textbox);
-TextButton* create_text_button_intrinsic(char* text, int posx, int posy, int width, int height, int fontSize, Color normalColor, Color hoverColor, bool* toggle);
-UiElement* create_text_button(char* text, int posx, int posy, int width, int height, int fontSize, Color normalColor, Color hoverColor, bool* toggle);
+TextButton* create_text_button_intrinsic(char* text, int posx, int posy, int width, int height, unsigned int fontSize, Color normalColor, Color hoverColor, bool* toggle);
+UiElement* create_text_button(char* text, int posx, int posy, int width, int height, unsigned int fontSize, Color normalColor, Color hoverColor, bool* toggle);
 Button* create_button(int posx, int posy, int width, int height, Color normalColor, Color hoverColor, bool* toggle);
-UiElement* create_text_input(char* buf, int bufsize,int posx, int posy, int width, int height, int fontSize, Color color);
-TextInput* create_text_input_intrinsic(char* buf, int bufsize,int posx, int posy, int width, int height, int fontSize, Color color);
+UiElement* create_text_input(char* buf, unsigned int bufsize, int posx, int posy, int width, int height, unsigned int fontSize, Color color);
+TextInput* create_text_input_intrinsic(char* buf, unsigned int bufsize, int posx, int posy, int width, int height, unsigned int fontSize, Color color);
 void kill_pane(Pane** pane);
 UiElement* text_button_to_element(TextButton* tb);
 void draw_text_box(TextBox* tb);
