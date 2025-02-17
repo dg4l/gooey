@@ -29,7 +29,7 @@ int main(void){
     bool inc = 0;
     bool shouldDelete = 0;
     char cValbuf[10];
-    char inbuf[256];
+    char* inbuf = malloc(sizeof(char) * 256);
     int txtpos = 0;
     Pane* testpane = create_pane(0, 0, 640, 900, 5, GRAY);
     Pane* testpane2 = create_pane(640, 0, 640, 900, 5, LIGHTGRAY);
@@ -69,5 +69,10 @@ int main(void){
         }
         EndDrawing();
     }
+    kill_pane(&testpane);
+    kill_pane(&testpane2);
+    free(inbuf);
+    inbuf = NULL;
     CloseWindow();
+    return 0;
 }
