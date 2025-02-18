@@ -217,11 +217,13 @@ Pane* create_pane(int posx, int posy, int w, int h, uint16_t max_elements, Color
 }
 
 bool bind_element_to_pane(UiElement* el, Pane* pane){
-    if (pane->elementCount < pane->max_elements){
-        pane->elements[pane->elementCount] = el;
-        if (&pane->elements[pane->elementCount]){
-            ++pane->elementCount;
-            return 1;
+    if (el){
+        if (pane->elementCount < pane->max_elements){
+            pane->elements[pane->elementCount] = el;
+            if (&pane->elements[pane->elementCount]){
+                ++pane->elementCount;
+                return 1;
+            }
         }
     }
     return 0;
