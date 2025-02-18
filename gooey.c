@@ -22,7 +22,7 @@ void draw_text_button(TextButton* tb){
 }
 
 bool isBullshitKey(int key){ 
-    if (key == KEY_ENTER || key == KEY_TAB || key == KEY_LEFT_CONTROL || key == KEY_LEFT_ALT || key == KEY_RIGHT_CONTROL || key == KEY_RIGHT_ALT || key == KEY_LEFT_SHIFT || key == KEY_RIGHT_SHIFT){
+    if (key == KEY_ENTER || key == KEY_TAB || key == KEY_LEFT_CONTROL || key == KEY_LEFT_ALT || key == KEY_RIGHT_CONTROL || key == KEY_RIGHT_ALT || key == KEY_LEFT_SHIFT || key == KEY_RIGHT_SHIFT || key == KEY_UP || key == KEY_DOWN){
         return 1;
     }
     else{
@@ -55,7 +55,7 @@ void draw_text_input(TextInput* ti){
                             ti->buf[ti->curPos-1] = '\0';
                         }
                         else{
-                            ti->buf[ti->curPos-1] = '0';
+                            ti->buf[ti->curPos-1] = ' ';
                         }
                         --ti->curPos;
                         --ti->txtLength;
