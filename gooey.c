@@ -21,9 +21,17 @@ void draw_text_button(TextButton* tb){
     DrawText(tb->label, tb->button->bounds.x + 2, tb->button->bounds.y + tb->button->bounds.height/2, tb->fontSize, WHITE);
 }
 
+bool isBullshitKey(int key){ 
+    if (key == KEY_ENTER || key == KEY_TAB || key == KEY_LEFT_CONTROL || key == KEY_LEFT_ALT || key == KEY_RIGHT_CONTROL || key == KEY_RIGHT_ALT || key == KEY_LEFT_SHIFT || key == KEY_RIGHT_SHIFT){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
 // FIXME: don't allow multiple of these shits to be selected, maybe handle in a context struct
 // TODO: handle shift combos, for now we ignore shift 
-// TODO: add arrow key cursor movement 
 void draw_text_input(TextInput* ti){
     draw_text_button(ti->tb);
     // in case of overflow somehow
@@ -34,20 +42,40 @@ void draw_text_input(TextInput* ti){
             int key = GetKeyPressed();
             if (key){
                 while (key > 0){
-                if (key == KEY_ENTER || key == KEY_TAB || key == KEY_LEFT_CONTROL || key == KEY_LEFT_ALT || key == KEY_RIGHT_CONTROL || key == KEY_RIGHT_ALT || key == KEY_LEFT_SHIFT || key == KEY_RIGHT_SHIFT){
+                if (isBullshitKey(key)){
                     break;
                 }
                 else if (ti->curPos < ti->bufsize){
+                    // TODO: CLEANUP ABSOLUTE DISGUSTING MESS
                     if (key == 259){
                         if (ti->curPos <= 0){
                             return;
                         }
-                        ti->buf[ti->curPos-1] = '\0';
+                        if (ti->curPos == ti->txtLength){
+                            ti->buf[ti->curPos-1] = '\0';
+                        }
+                        else{
+                            ti->buf[ti->curPos-1] = '0';
+                        }
                         --ti->curPos;
+                        --ti->txtLength;
+                    }
+                    else if (key == KEY_LEFT){
+                        if (ti->curPos > 0){
+                            --ti->curPos;
+                        }
+                    }
+                    else if (key == KEY_RIGHT){
+                        if (ti->curPos < ti->txtLength){
+                            ++ti->curPos;
+                        }
                     }
                     else{
                         ti->buf[ti->curPos] = key;
-                        ti->buf[ti->curPos+1] = '\0';
+                        if (ti->curPos == ti->txtLength){
+                            ti->buf[ti->curPos+1] = '\0';
+                            ++ti->txtLength;
+                        }
                         ++ti->curPos;
                     }
                     key = GetKeyPressed();

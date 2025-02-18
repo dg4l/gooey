@@ -67,6 +67,7 @@ typedef struct TextInput{
     //int keyPressed;
     unsigned int bufsize;
     unsigned int curPos;
+    unsigned int txtLength;
     bool allowInput;
 }TextInput;
 
