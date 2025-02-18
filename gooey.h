@@ -98,3 +98,5 @@ void draw_text_button(TextButton* tb);
 void draw_pane(Pane* pane);
 bool button_hovered(Button* button);
 bool button_clicked(Button* button);
+bool isBullshitKey(int key);
+bool handleBackspace(TextInput* ti);
