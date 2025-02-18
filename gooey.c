@@ -30,6 +30,20 @@ bool isBullshitKey(int key){
     }
 }
 
+bool handleBackspace(TextInput* ti){
+        if (ti->curPos <= 0){
+            return 0;
+        }
+        if (ti->curPos == ti->txtLength){
+            ti->buf[ti->curPos-1] = '\0';
+        }
+        else{
+            ti->buf[ti->curPos-1] = ' ';
+        }
+        --ti->curPos;
+        --ti->txtLength;
+}
+
 // FIXME: don't allow multiple of these shits to be selected, maybe handle in a context struct
 // TODO: handle shift combos, for now we ignore shift 
 void draw_text_input(TextInput* ti){
@@ -48,17 +62,9 @@ void draw_text_input(TextInput* ti){
                 else if (ti->curPos < ti->bufsize){
                     // TODO: CLEANUP ABSOLUTE DISGUSTING MESS
                     if (key == 259){
-                        if (ti->curPos <= 0){
+                        if (!handleBackspace(ti)){
                             return;
                         }
-                        if (ti->curPos == ti->txtLength){
-                            ti->buf[ti->curPos-1] = '\0';
-                        }
-                        else{
-                            ti->buf[ti->curPos-1] = ' ';
-                        }
-                        --ti->curPos;
-                        --ti->txtLength;
                     }
                     else if (key == KEY_LEFT){
                         if (ti->curPos > 0){
