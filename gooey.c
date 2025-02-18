@@ -44,6 +44,44 @@ bool handleBackspace(TextInput* ti){
         --ti->txtLength;
 }
 
+void handleTextInputKeypress(TextInput* ti){
+    int key = GetKeyPressed();
+    if (key){
+        while (key > 0){
+            if (isBullshitKey(key)){
+                break;
+            }
+            else if (ti->curPos < ti->bufsize){
+                if (key == 259){
+                    if (!handleBackspace(ti)){
+                        return;
+                    }
+                }
+                else if (key == KEY_LEFT){
+                    if (ti->curPos > 0){
+                        --ti->curPos;
+                    }
+                }
+                else if (key == KEY_RIGHT){
+                    if (ti->curPos < ti->txtLength){
+                        ++ti->curPos;
+                    }
+                }
+                else{
+                    ti->buf[ti->curPos] = key;
+                    if (ti->curPos == ti->txtLength){
+                        ti->buf[ti->curPos+1] = '\0';
+                        ++ti->txtLength;
+                    }
+                    ++ti->curPos;
+                }
+                key = GetKeyPressed();
+            }
+        }
+    }
+}
+
+
 // FIXME: don't allow multiple of these shits to be selected, maybe handle in a context struct
 // TODO: handle shift combos, for now we ignore shift 
 // TODO: clean up this horrible function 
@@ -54,40 +92,7 @@ void draw_text_input(TextInput* ti){
         ti->curPos = ti->bufsize-1;
     }
     if (*(ti->tb->button->toggle)){
-            int key = GetKeyPressed();
-            if (key){
-                while (key > 0){
-                if (isBullshitKey(key)){
-                    break;
-                }
-                else if (ti->curPos < ti->bufsize){
-                    if (key == 259){
-                        if (!handleBackspace(ti)){
-                            return;
-                        }
-                    }
-                    else if (key == KEY_LEFT){
-                        if (ti->curPos > 0){
-                            --ti->curPos;
-                        }
-                    }
-                    else if (key == KEY_RIGHT){
-                        if (ti->curPos < ti->txtLength){
-                            ++ti->curPos;
-                        }
-                    }
-                    else{
-                        ti->buf[ti->curPos] = key;
-                        if (ti->curPos == ti->txtLength){
-                            ti->buf[ti->curPos+1] = '\0';
-                            ++ti->txtLength;
-                        }
-                        ++ti->curPos;
-                    }
-                    key = GetKeyPressed();
-                }
-           }
-        }
+        handleTextInputKeypress(ti);
     }
 }
 
