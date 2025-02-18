@@ -223,13 +223,8 @@ bool bind_element_to_pane(UiElement* el, Pane* pane){
             ++pane->elementCount;
             return 1;
         }
-        else{
-            return 0;
-        }
     }
-    else{
-        return 0;
-    }
+    return 0;
 }
 
 UiElement* text_box_to_element(TextBox* textbox){
