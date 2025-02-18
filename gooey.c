@@ -46,6 +46,7 @@ bool handleBackspace(TextInput* ti){
 
 // FIXME: don't allow multiple of these shits to be selected, maybe handle in a context struct
 // TODO: handle shift combos, for now we ignore shift 
+// TODO: clean up this horrible function 
 void draw_text_input(TextInput* ti){
     draw_text_button(ti->tb);
     // in case of overflow somehow
@@ -60,7 +61,6 @@ void draw_text_input(TextInput* ti){
                     break;
                 }
                 else if (ti->curPos < ti->bufsize){
-                    // TODO: CLEANUP ABSOLUTE DISGUSTING MESS
                     if (key == 259){
                         if (!handleBackspace(ti)){
                             return;
