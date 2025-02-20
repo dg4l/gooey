@@ -40,7 +40,6 @@ int main(void){
     UiElement* delButton = create_text_button("DEALLOC!", 300, 90, 150, 50, 25, RED, GREEN, &shouldDelete);
     UiElement* txtinput = create_text_input(inbuf, 50, 50, 150, 400, 125, 25, DARKGRAY);
     bind_element_to_pane(decButton, testpane);
-    bind_element_to_pane(NULL, testpane);
     bind_element_to_pane(incButton, testpane);
     bind_element_to_pane(valDisplay, testpane);
     bind_element_to_pane(delButton, testpane);
